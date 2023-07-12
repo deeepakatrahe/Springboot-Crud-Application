@@ -1,8 +1,6 @@
 package com.springboot.crudoperations.employees.controller;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +32,11 @@ public class TransactionsController {
 	@GetMapping("/getAllTransaction/{empid}")
 	public List<Transactions> getTransaction(@PathVariable int empid){
 		return transactionService.getTransaction(empid);
+	}
+	
+	@GetMapping("/join")
+	public int getQuery() {
+		return transactionService.getQuery();
 	}
 	
 }

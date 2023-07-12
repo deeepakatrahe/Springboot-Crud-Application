@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="MyApp" packages="">
+	<Properties>
+		<property name="log.file.path">${bundle:application:log.file.path}</property>
+		<property name="log.file.path.gz">${bundle:application:log.file.path.gz}</property>
+		<property name="log.file.name">${bundle:application:log.file.name}</property>
+		<property name="log.file.size">${bundle:application:log.file.size}</property>
+		<property name="log.level">${bundle:application:log.level}</property>
+	</Properties>
+	<Appenders>
+		<RollingFile name="RollingFile"			
+			fileName="${log.file.path}/${log.file.name}.log"
+			filePattern="${log.file.path.gz}/$${date:yyyy_MM_dd}/${log.file.name}_%d{yyyy_MM_dd_HH}_%i.log.gz">
+			<PatternLayout
+				pattern="%d [%t] %-5level %logger{36} - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="999"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy
+					size="${log.file.size}" />
+			</Policies>
+		</RollingFile>
+		<Console name="LogToConsole" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="${log.level}">
+			<AppenderRef ref="RollingFile" />
+		 	<AppenderRef ref="LogToConsole" /> 
+
+
+		</Root>
+	</Loggers>
+</Configuration>
